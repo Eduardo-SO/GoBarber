@@ -1,6 +1,8 @@
 import { getCustomRepository } from 'typeorm';
 import { hash } from 'bcryptjs';
 
+import AppError from '../errors/AppError';
+
 import User from '../entities/User';
 import UserRepository from '../repositories/UsersRepository';
 
@@ -17,7 +19,7 @@ class CreateAppointmentService {
     const findUserWithSameEmail = await userRepository.findByEmail(email);
 
     if (findUserWithSameEmail) {
-      throw Error('This email already exists');
+      throw new AppError('This email already exists');
     }
 
     const hashedPassword = await hash(password, 8);
