@@ -1,22 +1,26 @@
-import { getCustomRepository } from 'typeorm';
 import { hash } from 'bcryptjs';
+import { inject, injectable } from 'tsyringe';
 
 import User from '@modules/users/infra/typeorm/entities/User';
 import AppError from '@shared/errors/AppError';
 
-import UserRepository from '@modules/users/repositories/UsersRepository';
+import UsersRepository from '@modules/users/repositories/IUsersRepository';
 
-interface RequestDTO {
+interface IRequest {
   name: string;
   email: string;
   password: string;
 }
 
+@injectable()
 class CreateAppointmentService {
-  public async execute({ name, email, password }: RequestDTO): Promise<User> {
-    const userRepository = getCustomRepository(UserRepository);
+  constructor(
+    @inject('UsersRepository')
+    private usersRepository: UsersRepository,
+  ) {}
 
-    const findUserWithSameEmail = await userRepository.findByEmail(email);
+  public async execute({ name, email, password }: IRequest): Promise<User> {
+    const findUserWithSameEmail = await this.usersRepository.findByEmail(email);
 
     if (findUserWithSameEmail) {
       throw new AppError('This email already exists');
@@ -24,13 +28,11 @@ class CreateAppointmentService {
 
     const hashedPassword = await hash(password, 8);
 
-    const user = userRepository.create({
+    const user = await this.usersRepository.create({
       name,
       email,
       password: hashedPassword,
     });
-
-    await userRepository.save(user);
 
     return user;
   }
