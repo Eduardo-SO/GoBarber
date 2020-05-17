@@ -1,4 +1,4 @@
-// import AppError from '@shared/errors/AppError';
+import AppError from '@shared/errors/AppError';
 
 import FakeUsersRepository from '../repositories/fakes/FakeUsersRepository';
 import ShowProfileService from './ShowProfileService';
@@ -26,5 +26,13 @@ describe('SendForgotPasswordEmail', () => {
 
     expect(user.name).toBe('John Doe');
     expect(user.email).toBe('johndoe@example.com');
+  });
+
+  it('Should not be able to show the profile from non-existing user', async () => {
+    expect(
+      showProfile.execute({
+        user_id: 'non-existing-user-id',
+      }),
+    ).rejects.toBeInstanceOf(AppError);
   });
 });
