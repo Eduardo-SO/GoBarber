@@ -1,4 +1,4 @@
-// import AppError from '@shared/errors/AppError';
+import AppError from '@shared/errors/AppError';
 
 import FakeHashProvider from '../providers/HashProvider/fakes/FakeHashProvider';
 import FakeUsersRepository from '../repositories/fakes/FakeUsersRepository';
@@ -34,5 +34,27 @@ describe('SendForgotPasswordEmail', () => {
 
     expect(updatedUser.name).toBe('John Trê');
     expect(updatedUser.email).toBe('johntre@example.com');
+  });
+
+  it('Should not be able to update the email to one that already exists', async () => {
+    await fakeUsersRepository.create({
+      name: 'John Doe',
+      email: 'johndoe@example.com',
+      password: '123456',
+    });
+
+    const user = await fakeUsersRepository.create({
+      name: 'John Trê',
+      email: 'johntre@example.com',
+      password: '123333',
+    });
+
+    await expect(
+      updateProfile.execute({
+        user_id: user.id,
+        name: 'John Doe',
+        email: 'johndoe@example.com',
+      }),
+    ).rejects.toBeInstanceOf(AppError);
   });
 });
