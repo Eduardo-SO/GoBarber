@@ -46,14 +46,23 @@ class UpdateProfile {
     user.name = name;
     user.email = email;
 
-    if (password) {
-      user.password = await this.hashProvider.generateHash(password);
-    }
-
     if (password && !old_password) {
       throw new AppError(
         'You need to inform your old password to set a new password',
       );
+    }
+
+    if (password && old_password) {
+      const checkOldPassword = await this.hashProvider.compareHash(
+        old_password,
+        user.password,
+      );
+
+      if (!checkOldPassword) {
+        throw new AppError('Old password does not match');
+      }
+
+      user.password = await this.hashProvider.generateHash(password);
     }
 
     return this.usersRepository.save(user);
