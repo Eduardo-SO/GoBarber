@@ -8,6 +8,7 @@ import { errors } from 'celebrate';
 
 import uploadConfig from '@config/upload';
 import AppError from '@shared/errors/AppError';
+import rateLimiter from './middlewares/rateLimiter';
 import routes from './routes';
 
 import '@shared/infra/typeorm';
@@ -20,6 +21,7 @@ app.listen(3333, () => {
 });
 
 app.use(express.json());
+app.use(rateLimiter);
 app.use('/files', express.static(uploadConfig.uploadsFolder));
 app.use(routes);
 
