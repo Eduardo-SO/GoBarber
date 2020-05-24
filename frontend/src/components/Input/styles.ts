@@ -18,9 +18,12 @@ export const Container = styled.div`
 
   input {
     flex: 1;
-    background: transparent;
+
     border: 0;
     padding: 16px 0;
+
+    background: transparent;
+    color: #f4ede8;
 
     &::placeholder {
       color: #666360;
