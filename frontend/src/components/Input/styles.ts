@@ -49,6 +49,7 @@ export const Container = styled.div<ContainerProps>`
   }
 
   svg {
+    min-width: 20px;
     margin-right: 16px;
   }
 `;
