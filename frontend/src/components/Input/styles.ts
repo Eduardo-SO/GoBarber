@@ -19,6 +19,8 @@ export const Container = styled.div<ContainerProps>`
   color: #666360;
   background: #232129;
 
+  transition: border-color 0.3s;
+
   ${props =>
     props.isErrored &&
     css`
