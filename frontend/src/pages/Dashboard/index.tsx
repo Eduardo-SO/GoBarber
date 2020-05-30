@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { FiPower, FiClock } from 'react-icons/fi';
 
@@ -11,11 +11,15 @@ import {
   Content,
   Schedule,
   NextAppointments,
+  Section,
+  Appointment,
   Calendar,
 } from './styles';
 import { useAuth } from '../../hooks/auth';
 
 const Dashboard: React.FC = () => {
+  const [selectedDate, setSelectedDate] = useState(new Date());
+
   const { signOut, user } = useAuth();
 
   return (
@@ -63,6 +67,75 @@ const Dashboard: React.FC = () => {
               </span>
             </div>
           </NextAppointments>
+
+          <Section>
+            <strong>Manhã</strong>
+
+            <Appointment>
+              <span>
+                <FiClock />
+                8:00
+              </span>
+
+              <div>
+                <img
+                  src="https://avatars3.githubusercontent.com/u/23387339?s=400&u=d9949402799d146cabc239beea101d3444aef2c8&v=4"
+                  alt="Michelli Brito"
+                />
+
+                <strong>Michelli Brito</strong>
+              </div>
+            </Appointment>
+            <Appointment>
+              <span>
+                <FiClock />
+                8:00
+              </span>
+
+              <div>
+                <img
+                  src="https://avatars3.githubusercontent.com/u/23387339?s=400&u=d9949402799d146cabc239beea101d3444aef2c8&v=4"
+                  alt="Michelli Brito"
+                />
+
+                <strong>Michelli Brito</strong>
+              </div>
+            </Appointment>
+          </Section>
+          <Section>
+            <strong>Tarde</strong>
+
+            <Appointment>
+              <span>
+                <FiClock />
+                8:00
+              </span>
+
+              <div>
+                <img
+                  src="https://avatars3.githubusercontent.com/u/23387339?s=400&u=d9949402799d146cabc239beea101d3444aef2c8&v=4"
+                  alt="Michelli Brito"
+                />
+
+                <strong>Michelli Brito</strong>
+              </div>
+            </Appointment>
+            <Appointment>
+              <span>
+                <FiClock />
+                8:00
+              </span>
+
+              <div>
+                <img
+                  src="https://avatars3.githubusercontent.com/u/23387339?s=400&u=d9949402799d146cabc239beea101d3444aef2c8&v=4"
+                  alt="Michelli Brito"
+                />
+
+                <strong>Michelli Brito</strong>
+              </div>
+            </Appointment>
+          </Section>
         </Schedule>
         <Calendar />
       </Content>
