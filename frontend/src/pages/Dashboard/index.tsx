@@ -1,9 +1,18 @@
 import React from 'react';
 
-import { FiPower } from 'react-icons/fi';
+import { FiPower, FiClock } from 'react-icons/fi';
 
 import logoImg from '../../assets/logo.svg';
-import { Container, Header, HeaderContent, Profile } from './styles';
+import {
+  Container,
+  Header,
+  HeaderContent,
+  Profile,
+  Content,
+  Schedule,
+  NextAppointments,
+  Calendar,
+} from './styles';
 import { useAuth } from '../../hooks/auth';
 
 const Dashboard: React.FC = () => {
@@ -29,10 +38,34 @@ const Dashboard: React.FC = () => {
           </button>
         </HeaderContent>
       </Header>
-      <h1>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab numquam
-        dolore eaque eos quaerat rerum similique ullam maiores alias qui?
-      </h1>
+      <Content>
+        <Schedule>
+          <h1>Horários agendados</h1>
+          <p>
+            <span>Hoje</span>
+            <span>Dia 06</span>
+            <span>Segunda-feira</span>
+          </p>
+
+          <NextAppointments>
+            <strong>Atendimento a seguir</strong>
+
+            <div>
+              <img
+                src="https://avatars3.githubusercontent.com/u/23387339?s=400&u=d9949402799d146cabc239beea101d3444aef2c8&v=4"
+                alt="Michelli Brito"
+              />
+
+              <strong>Michelli Brito</strong>
+              <span>
+                <FiClock />
+                08:00
+              </span>
+            </div>
+          </NextAppointments>
+        </Schedule>
+        <Calendar />
+      </Content>
     </Container>
   );
 };
