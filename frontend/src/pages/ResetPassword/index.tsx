@@ -1,11 +1,11 @@
 import React, { useRef, useCallback, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import * as Yup from 'yup';
 import { FiLock } from 'react-icons/fi';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 
-// import api from '../../services/api';
+import api from '../../services/api';
 
 import getValidationErrors from '../../utils/getValidationErrors';
 import { useToast } from '../../hooks/toast';
@@ -25,6 +25,7 @@ const ResetPassword: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const [loading, setLoading] = useState(false);
   const history = useHistory();
+  const location = useLocation();
 
   const { addToast } = useToast();
 
@@ -48,10 +49,19 @@ const ResetPassword: React.FC = () => {
           abortEarly: false,
         });
 
-        // await api.post('password/reset', {
-        //   password: data.password,
-        //   password_confirmation: data.password_confirmation,
-        // });
+        const token = location.search.replace('?token=', '');
+
+        if (!token) {
+          throw new Error();
+        }
+
+        const { password, password_confirmation } = data;
+
+        await api.post('password/reset', {
+          password,
+          password_confirmation,
+          token,
+        });
 
         history.push('/');
       } catch (err) {
@@ -70,7 +80,7 @@ const ResetPassword: React.FC = () => {
         setLoading(false);
       }
     },
-    [addToast, history],
+    [addToast, history, location.search],
   );
 
   return (
