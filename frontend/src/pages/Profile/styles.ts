@@ -2,11 +2,22 @@ import styled from 'styled-components';
 import { shade } from 'polished';
 
 export const Container = styled.div`
-  height: 100vh;
+  > header {
+    display: flex;
+    align-items: center;
 
-  display: flex;
-  justify-content: center;
-  align-items: stretch;
+    padding: 0 10%;
+
+    height: 145px;
+    background: #28262e;
+
+    svg {
+      width: 25px;
+      height: 25px;
+
+      color: #999591;
+    }
+  }
 `;
 
 export const Content = styled.div`
@@ -16,11 +27,11 @@ export const Content = styled.div`
   align-items: center;
 
   overflow: hidden;
+  margin: -95px auto 0;
 
   width: 100%;
 
   form {
-    margin: 80px 0;
     width: 340px;
     text-align: center;
 

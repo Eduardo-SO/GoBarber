@@ -1,6 +1,6 @@
 import React, { useCallback, useRef } from 'react';
-import { useHistory } from 'react-router-dom';
-import { FiUser, FiMail, FiLock, FiCamera } from 'react-icons/fi';
+import { useHistory, Link } from 'react-router-dom';
+import { FiUser, FiMail, FiLock, FiCamera, FiArrowLeft } from 'react-icons/fi';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
@@ -72,8 +72,21 @@ const Profile: React.FC = () => {
 
   return (
     <Container>
+      <header>
+        <Link to="/dashboard">
+          <FiArrowLeft />
+        </Link>
+      </header>
+
       <Content>
-        <Form onSubmit={handleSubmit} ref={formRef}>
+        <Form
+          initialData={{
+            name: user.name,
+            email: user.email,
+          }}
+          onSubmit={handleSubmit}
+          ref={formRef}
+        >
           <AvatarInput>
             <img src={user.avatar_url} alt={user.name} />
             <button type="button">
