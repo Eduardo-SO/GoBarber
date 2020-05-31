@@ -74,7 +74,7 @@ export const AvatarInput = styled.div`
     border-radius: 50%;
   }
 
-  button {
+  label {
     position: absolute;
     right: 0;
     bottom: 0;
@@ -94,6 +94,10 @@ export const AvatarInput = styled.div`
 
     &:hover {
       background: ${shade(0.2, '#ff9000')};
+    }
+
+    input {
+      display: none;
     }
 
     svg {
