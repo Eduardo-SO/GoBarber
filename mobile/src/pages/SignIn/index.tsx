@@ -1,5 +1,11 @@
 import React from 'react';
-import { Image } from 'react-native';
+import {
+  Image,
+  View,
+  ScrollView,
+  KeyboardAvoidingView,
+  Platform,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 
 import Input from '../../components/Input';
@@ -19,30 +25,43 @@ import logoImg from '../../assets/logo.png';
 const SignIn: React.FC = () => {
   return (
     <>
-      <Container>
-        <Image source={logoImg} />
-
-        <Title>Faça seu Logon</Title>
-
-        <Input name="email" icon="mail" placeholder="Email" />
-        <Input name="password" icon="lock" placeholder="Senha" />
-
-        <Button
-          onPress={() => {
-            console.log('Clicou');
-          }}
+      <KeyboardAvoidingView
+        style={{ flex: 1 }}
+        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+        enabled
+      >
+        <ScrollView
+          contentContainerStyle={{ flex: 1 }}
+          keyboardShouldPersistTaps="handled"
         >
-          Entrar
-        </Button>
+          <Container>
+            <Image source={logoImg} />
 
-        <ForgotPassword
-          onPress={() => {
-            console.log('Clicou');
-          }}
-        >
-          <ForgotPasswordText>Esqueci minha senha</ForgotPasswordText>
-        </ForgotPassword>
-      </Container>
+            <View>
+              <Title>Faça seu Logon</Title>
+            </View>
+
+            <Input name="email" icon="mail" placeholder="Email" />
+            <Input name="password" icon="lock" placeholder="Senha" />
+
+            <Button
+              onPress={() => {
+                console.log('Clicou');
+              }}
+            >
+              Entrar
+            </Button>
+
+            <ForgotPassword
+              onPress={() => {
+                console.log('Clicou');
+              }}
+            >
+              <ForgotPasswordText>Esqueci minha senha</ForgotPasswordText>
+            </ForgotPassword>
+          </Container>
+        </ScrollView>
+      </KeyboardAvoidingView>
       <CreateAccountButton
         onPress={() => {
           console.log('Clicou');
