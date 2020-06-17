@@ -6,6 +6,7 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Feather';
 
 import Input from '../../components/Input';
@@ -23,6 +24,8 @@ import {
 import logoImg from '../../assets/logo.png';
 
 const SignIn: React.FC = () => {
+  const navigation = useNavigation();
+
   return (
     <>
       <KeyboardAvoidingView
@@ -52,21 +55,13 @@ const SignIn: React.FC = () => {
               Entrar
             </Button>
 
-            <ForgotPassword
-              onPress={() => {
-                console.log('Clicou');
-              }}
-            >
+            <ForgotPassword onPress={() => navigation.navigate('SignUp')}>
               <ForgotPasswordText>Esqueci minha senha</ForgotPasswordText>
             </ForgotPassword>
           </Container>
         </ScrollView>
       </KeyboardAvoidingView>
-      <CreateAccountButton
-        onPress={() => {
-          console.log('Clicou');
-        }}
-      >
+      <CreateAccountButton onPress={() => navigation.navigate('SignUp')}>
         <Icon name="log-in" size={20} color="#ff9000" />
         <CreateAccountButtonText>Criar conta</CreateAccountButtonText>
       </CreateAccountButton>
