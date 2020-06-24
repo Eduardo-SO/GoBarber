@@ -1,16 +1,20 @@
 import React from 'react';
-import { Button } from 'react-native';
 
 import { useAuth } from '../../hooks/auth';
 
-import { Container } from './styles';
+import { Container, Header, HeaderTitle, UserName } from './styles';
 
 const Dashboard: React.FC = () => {
   const { signOut } = useAuth();
 
   return (
     <Container>
-      <Button title="Sair" onPress={signOut} />
+      <Header>
+        <HeaderTitle>
+          Bem vindo, {'\n'}
+          <UserName>Eduardo Souza de Oliveira</UserName>
+        </HeaderTitle>
+      </Header>
     </Container>
   );
 };
