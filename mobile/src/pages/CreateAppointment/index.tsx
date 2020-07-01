@@ -185,8 +185,8 @@ const CreateAppointment: React.FC = () => {
             <SectionTitle>Manhã</SectionTitle>
 
             <SectionContent>
-              {morningAvailability.map(({ hourFormatted }) => (
-                <Hour key={hourFormatted}>
+              {morningAvailability.map(({ hourFormatted, available }) => (
+                <Hour available={available} key={hourFormatted}>
                   <HourText>{hourFormatted}</HourText>
                 </Hour>
               ))}
@@ -197,8 +197,8 @@ const CreateAppointment: React.FC = () => {
             <SectionTitle>Tarde</SectionTitle>
 
             <SectionContent>
-              {afternoonAvailability.map(({ hourFormatted }) => (
-                <Hour key={hourFormatted}>
+              {afternoonAvailability.map(({ hourFormatted, available }) => (
+                <Hour available={available} key={hourFormatted}>
                   <HourText>{hourFormatted}</HourText>
                 </Hour>
               ))}
