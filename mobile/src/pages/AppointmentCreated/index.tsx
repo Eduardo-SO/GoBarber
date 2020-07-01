@@ -1,16 +1,38 @@
-import React from 'react';
-import { Button } from 'react-native';
+import React, { useCallback } from 'react';
+import Icon from 'react-native-vector-icons/Feather';
 
-import { useAuth } from '../../hooks/auth';
-
-import { Container } from './styles';
+import { useNavigation } from '@react-navigation/native';
+import {
+  Container,
+  Title,
+  Description,
+  OkButton,
+  OkButtonText,
+} from './styles';
 
 const AppointmentCreated: React.FC = () => {
-  const { signOut } = useAuth();
+  const { reset } = useNavigation();
+
+  const handleOkPressed = useCallback(() => {
+    reset({
+      routes: [{ name: 'Dashboard' }, { name: 'Dashboard' }],
+      index: 0,
+    });
+  }, [reset]);
 
   return (
     <Container>
-      <Button title="Sair" onPress={signOut} />
+      <Icon color="#04d361" size={80} name="check" />
+
+      <Title>Agendamento concluído!</Title>
+
+      <Description>
+        Terça, dia 14 de março de 2020 às 14:00h com Eduardo
+      </Description>
+
+      <OkButton onPress={handleOkPressed}>
+        <OkButtonText>Ok</OkButtonText>
+      </OkButton>
     </Container>
   );
 };
