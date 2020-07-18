@@ -14,6 +14,6 @@ describe('SignIn page', () => {
   it('should be able to sign in', () => {
     const { debug } = render(<SignIn />);
 
-    debug;
+    debug();
   });
 });
